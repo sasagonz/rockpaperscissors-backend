@@ -1,7 +1,6 @@
 package com.santi.rockpaperscissors.engine;
 
 import com.santi.rockpaperscissors.model.Player;
-import com.santi.rockpaperscissors.model.RoundRequest;
 import com.santi.rockpaperscissors.model.Shape;
 import lombok.AllArgsConstructor;
 
@@ -10,10 +9,7 @@ public class RoundEngine {
 
     private ShapeComparator shapeComparator;
 
-    public String getWinner(RoundRequest roundRequest) {
-
-        Player player1 = roundRequest.getPlayer1();
-        Player player2 = roundRequest.getPlayer2();
+    public String getWinnerName(Player player1, Player player2) {
 
         Shape value1 = player1.getValue();
         Shape value2 = player2.getValue();

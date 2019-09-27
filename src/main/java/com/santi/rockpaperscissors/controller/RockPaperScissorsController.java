@@ -11,10 +11,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class RockPaperScissorsController {
 
-    private RoundEngine roundCalculus;
+    private RoundEngine roundEngine;
 
     @PostMapping("/rounds")
-    public String playRound(@RequestBody RoundRequest roundRequest) {
-        return roundCalculus.getWinner(roundRequest);
+    public String playRound(
+        @RequestBody RoundRequest roundRequest) {
+        return roundEngine
+            .getWinnerName(
+                roundRequest.getPlayer1(),
+                roundRequest.getPlayer2());
     }
 }
