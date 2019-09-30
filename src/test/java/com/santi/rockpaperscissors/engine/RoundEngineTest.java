@@ -1,7 +1,6 @@
 package com.santi.rockpaperscissors.engine;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.text.IsEmptyString.isEmptyString;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 import org.junit.Before;
@@ -9,8 +8,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import com.santi.rockpaperscissors.model.Player;
 import com.santi.rockpaperscissors.model.Shape;
+import com.santi.rockpaperscissors.model.Winner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RoundEngineTest {
@@ -26,51 +25,39 @@ public class RoundEngineTest {
     }
 
     @Test
-    public void shouldGetSomePlayerName() {
+    public void shouldWinPlayer1() {
         // GIVEN
         when(shapeComparator.compare(Shape.PAPER, Shape.ROCK)).thenReturn(1);
-        Player player1 =
-            Player
-                .builder()
-                .name("player1")
-                .value(Shape.PAPER)
-                .build();
-        Player player2 =
-            Player
-                .builder()
-                .name("player2")
-                .value(Shape.ROCK)
-                .build();
 
         // WHEN
-        String winnerName = roundEngine.getWinnerName(player1, player2);
+        Winner winner = roundEngine.getWinner(Shape.PAPER, Shape.ROCK);
 
         // THEN
-        assertThat(winnerName, is("player1"));
+        assertThat(winner, is(Winner.PLAYER1));
     }
 
     @Test
-    public void shouldNotGetAnyPlayerName() {
+    public void shouldWinPlayer2() {
         // GIVEN
-        when(shapeComparator.compare(Shape.PAPER, Shape.PAPER)).thenReturn(0);
-        Player player1 =
-            Player
-                .builder()
-                .name("player1")
-                .value(Shape.PAPER)
-                .build();
-        Player player2 =
-            Player
-                .builder()
-                .name("player2")
-                .value(Shape.PAPER)
-                .build();
+        when(shapeComparator.compare(Shape.PAPER, Shape.SCISSORS)).thenReturn(-1);
 
         // WHEN
-        String winnerName = roundEngine.getWinnerName(player1, player2);
+        Winner winner = roundEngine.getWinner(Shape.PAPER, Shape.SCISSORS);
 
         // THEN
-        assertThat(winnerName, isEmptyString());
+        assertThat(winner, is(Winner.PLAYER2));
+    }
+
+    @Test
+    public void shouldNotWinAnybody() {
+        // GIVEN
+        when(shapeComparator.compare(Shape.PAPER, Shape.PAPER)).thenReturn(0);
+
+        // WHEN
+        Winner winner = roundEngine.getWinner(Shape.PAPER, Shape.PAPER);
+
+        // THEN
+        assertThat(winner, is(Winner.DRAWN));
     }
 
 }

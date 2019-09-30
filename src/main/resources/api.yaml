@@ -1,0 +1,137 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: PaperRockScissors
+  description: Api to play PaperRockScissors game
+paths:
+  /rounds/statistics:
+    get:
+      description: |
+        Returns statistics from all rounds for all customers
+      operationId: getStatistics
+      responses:
+        '200':
+          description: rounds response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistic'
+  /customers:
+    post:
+      description: Creates a new customer
+      operationId: createCustomer
+      responses:
+        '200':
+          description: customer response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /customers/{customerId}/rounds:
+    get:
+      description: Return all rounds for a given customer
+      operationId: getRoundsByCustomer
+      parameters:
+        - name: customerId
+          in: path
+          description: ID of customer
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: rounds retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoundResult'
+        '404':
+          description: customer not found
+    post:
+      description: Create one round for a given customer
+      operationId: createRound
+      parameters:
+        - name: customerId
+          in: path
+          description: ID of customer
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoundRequest'
+      responses:
+        '200':
+          description: round created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoundResult'
+        '404':
+          description: customer not found
+    delete:
+      description: Remove all rounds for a given customer
+      operationId: removeRounds
+      parameters:
+        - name: customerId
+          in: path
+          description: ID of customer
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: rounds deleted
+        '404':
+          description: customer not found
+components:
+  schemas:
+    RoundRequest:
+      type: object
+      properties:
+        player1:
+          $ref: '#/components/schemas/Shape'
+        player2:
+          $ref: '#/components/schemas/Shape'
+    RoundResult:
+      allOf:
+        - $ref: '#/components/schemas/RoundRequest'
+        - type: object
+          properties:
+            result:
+              $ref: '#/components/schemas/Winner'
+    Shape:
+      type: string
+      enum:
+        - ROCK
+        - PAPER
+        - SCISSORS
+    Winner:
+      type: string
+      enum:
+        - PLAYER1
+        - PLAYER2
+        - DRAWN
+    Statistic:
+      type: object
+      properties:
+        totalRoundsPlayed:
+          type: integer
+          format: int64
+        totalWinsFirstPlayer:
+          type: integer
+          format: int64
+        totalWinsSecondPlayer:
+          type: integer
+          format: int64
+        totalDrawns:
+          type: integer
+          format: int64

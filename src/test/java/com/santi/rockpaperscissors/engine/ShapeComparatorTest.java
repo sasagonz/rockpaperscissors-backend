@@ -27,10 +27,10 @@ public class ShapeComparatorTest {
     @Test
     public void shouldWinPaper() {
         // WHEN
-        int result = shapeComparator.compare(Shape.PAPER, Shape.ROCK);
+        int result = shapeComparator.compare(Shape.ROCK, Shape.PAPER);
 
         // THEN
-        assertThat(result, is(1));
+        assertThat(result, is(-1));
     }
 
     @Test
