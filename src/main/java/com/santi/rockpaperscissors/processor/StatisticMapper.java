@@ -1,4 +1,4 @@
-package com.santi.rockpaperscissors.mapper;
+package com.santi.rockpaperscissors.processor;
 
 import java.util.List;
 import com.santi.rockpaperscissors.model.RoundResult;
