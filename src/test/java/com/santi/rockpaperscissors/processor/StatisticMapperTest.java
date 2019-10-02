@@ -1,4 +1,4 @@
-package com.santi.rockpaperscissors.mapper;
+package com.santi.rockpaperscissors.processor;
 
 import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
@@ -9,6 +9,7 @@ import com.santi.rockpaperscissors.model.RoundResult;
 import com.santi.rockpaperscissors.model.Shape;
 import com.santi.rockpaperscissors.model.Statistic;
 import com.santi.rockpaperscissors.model.Winner;
+import com.santi.rockpaperscissors.processor.StatisticMapper;
 
 public class StatisticMapperTest {
 

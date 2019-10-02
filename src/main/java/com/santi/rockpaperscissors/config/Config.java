@@ -8,8 +8,10 @@ import com.santi.rockpaperscissors.api.DefaultRoundsApiDelegate;
 import com.santi.rockpaperscissors.engine.RoundEngine;
 import com.santi.rockpaperscissors.engine.ShapeComparator;
 import com.santi.rockpaperscissors.engine.ShapePrecedenceGraph;
-import com.santi.rockpaperscissors.mapper.RoundResultMapper;
-import com.santi.rockpaperscissors.mapper.StatisticMapper;
+import com.santi.rockpaperscissors.processor.RoundResultMapper;
+import com.santi.rockpaperscissors.processor.RoundResultTransformer;
+import com.santi.rockpaperscissors.processor.StatisticMapper;
+import com.santi.rockpaperscissors.processor.WinnerEnricher;
 import com.santi.rockpaperscissors.storage.InMemoryMapStorage;
 import com.santi.rockpaperscissors.storage.RockPaperScissorsStorage;
 
@@ -42,16 +44,27 @@ public class Config {
     }
 
     @Bean
+    public WinnerEnricher winnerEnricher() {
+        return new WinnerEnricher();
+    }
+
+    @Bean
+    public RoundResultTransformer roundResultTransformer(
+        RoundResultMapper roundResultMapper,
+        WinnerEnricher winnerEnricher,
+        RoundEngine roundEngine) {
+        return new RoundResultTransformer(roundResultMapper, winnerEnricher, roundEngine);
+    }
+
+    @Bean
     public DefaultCustomersApiDelegate defaultCustomersApiDelegate(
         NativeWebRequest nativeWebRequest,
-        RoundEngine roundEngine,
         RockPaperScissorsStorage storage,
-        RoundResultMapper roundResultMapper) {
+        RoundResultTransformer roundResultTransformer) {
         return new DefaultCustomersApiDelegate(
             nativeWebRequest,
-            roundEngine,
             storage,
-            roundResultMapper);
+            roundResultTransformer);
     }
 
     @Bean

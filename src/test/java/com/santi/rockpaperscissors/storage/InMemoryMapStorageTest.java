@@ -109,7 +109,8 @@ public class InMemoryMapStorageTest {
         inMemoryMapStorage.removeRoundsByUserId(1l);
 
         // THEN
-        assertEquals(0, inMemoryMapStorage.getRounds().size());
+        assertEquals(1, inMemoryMapStorage.getRounds().size());
+        assertEquals(0, inMemoryMapStorage.getRoundsByUserId(1l).size());
     }
 
 }

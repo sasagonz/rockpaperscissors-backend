@@ -52,7 +52,7 @@ paths:
           description: customer not found
     post:
       description: Create one round for a given customer
-      operationId: createRound
+      operationId: createRoundByCustomer
       parameters:
         - name: customerId
           in: path
@@ -78,7 +78,7 @@ paths:
           description: customer not found
     delete:
       description: Remove all rounds for a given customer
-      operationId: removeRounds
+      operationId: removeRoundsByCustomer
       parameters:
         - name: customerId
           in: path

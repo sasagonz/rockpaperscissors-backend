@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.NativeWebRequest;
-import com.santi.rockpaperscissors.mapper.StatisticMapper;
 import com.santi.rockpaperscissors.model.RoundResult;
 import com.santi.rockpaperscissors.model.Statistic;
+import com.santi.rockpaperscissors.processor.StatisticMapper;
 import com.santi.rockpaperscissors.storage.RockPaperScissorsStorage;
 import lombok.AllArgsConstructor;
 
