@@ -44,15 +44,16 @@ public class Config {
     }
 
     @Bean
-    public WinnerEnricher winnerEnricher(RoundEngine roundEngine) {
-        return new WinnerEnricher(roundEngine);
+    public WinnerEnricher winnerEnricher() {
+        return new WinnerEnricher();
     }
 
     @Bean
     public RoundResultTransformer roundResultTransformer(
         RoundResultMapper roundResultMapper,
-        WinnerEnricher winnerEnricher) {
-        return new RoundResultTransformer(roundResultMapper, winnerEnricher);
+        WinnerEnricher winnerEnricher,
+        RoundEngine roundEngine) {
+        return new RoundResultTransformer(roundResultMapper, winnerEnricher, roundEngine);
     }
 
     @Bean

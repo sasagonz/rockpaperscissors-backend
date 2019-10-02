@@ -57,7 +57,7 @@ public class DefaultCustomersApiDelegateTest {
     public void shouldCreateRound() {
         // GIVEN
         RoundResult expectedRoundResult = new RoundResult();
-        when(roundResultTransformer.apply(any())).thenReturn(expectedRoundResult);
+        when(roundResultTransformer.transform(any())).thenReturn(expectedRoundResult);
 
         // WHEN
         ResponseEntity<RoundResult> responseEntity =

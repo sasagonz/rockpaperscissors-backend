@@ -31,7 +31,7 @@ public class DefaultCustomersApiDelegate implements CustomersApiDelegate {
     @Override
     public ResponseEntity<RoundResult> createRoundByCustomer(Long customerId,
         RoundRequest roundRequest) {
-        RoundResult roundResult = roundResultTransformer.apply(roundRequest);
+        RoundResult roundResult = roundResultTransformer.transform(roundRequest);
         storage.saveRound(customerId, roundResult);
         return new ResponseEntity<>(roundResult, HttpStatus.OK);
     }
