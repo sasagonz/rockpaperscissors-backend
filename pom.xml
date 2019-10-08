@@ -129,7 +129,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>com.thomascook.search.ranking.Application</mainClass>
+          <mainClass>com.santi.rockpaperscissors.OpenAPI2SpringBoot</mainClass>
         </configuration>
         <executions>
           <execution>
