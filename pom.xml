@@ -17,7 +17,7 @@
 
   <properties>
     <java.version>1.8</java.version>
-    <openapi-generator.version>4.1.2</openapi-generator.version>
+    <openapi-generator.version>5.1.0</openapi-generator.version>
     <default.package>com.santi.rockpaperscissors</default.package>
     <springfox.version>2.9.2</springfox.version>
     <jacoco.version>0.8.4</jacoco.version>
